@@ -34,3 +34,9 @@ def verify_user_otp(mobile_number, otp):
 
 	if not messages or messages[0].get("code") != "1":
 		return {"status": 0, "msg": "OTP verification failed"}
+
+	user = frappe.session.user
+	frappe.local.login_manager.user = user
+	frappe.local.login_manager.post_login()
+
+	return {"status": 1, "msg": "Logged in successfully", "user": user}
