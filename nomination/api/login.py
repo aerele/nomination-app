@@ -5,7 +5,7 @@ from nomination.api.rangde_service import get_tokens, initiate_session, request_
 
 @frappe.whitelist(allow_guest=True)
 def user_validation(mobile_number):
-	mobile_number = str(mobile_number.strip())
+	mobile_number = str(mobile_number).strip()
 	user = frappe.db.get_value("User", {"mobile_no": mobile_number}, "name")
 	if not user:
 		return {"status": 0, "msg": "Mobile number not registered"}
